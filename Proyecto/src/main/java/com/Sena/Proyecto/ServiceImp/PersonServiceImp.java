@@ -50,6 +50,19 @@ public class PersonServiceImp implements PersonIService  {
     repository.deleteById(id);
     }
 
+    @Override
+    public   PersonResponse update ( Integer id, PersonRequestDto P) { // buscamos por id
+        Person person = repository.findById(id).orElse(null);  //si no encuentra nada devulve null
+        if (person == null) { // si no encuentra no pasa nada
+            return null; 
+        }
+        person.setName(P.getName()); // actualizamos los datos que nos envio el usuario 
+        person.setLastname(P.getLastname());
+        person.setEmail(P.getEmail());
+        repository.save(person);    // se guarda el nuevo cambio en la base de datos
+        return modelTodto(person);  // lo convierto en dto para mostar al usuario
+    }
+
     // vamos a pasr de Dto a Model 
 
        public Person dtoToModel (PersonRequestDto P) { // llega un dto lo convierto a model para guardar en la nbase de datos

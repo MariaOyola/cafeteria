@@ -53,6 +53,22 @@ public void deleteById (Integer id) {
 
 }
 
+@Override
+public UserResponse update (Integer id, UserRequestDto U) {  
+    User user = repository.findById(id).orElse(null); 
+
+    if (user == null) {
+        return null; 
+    }
+    user.setNameUser(U.getNameUser());
+    repository.save(user); 
+    return modelTodto(user); 
+
+
+
+    
+}
+
 public User dtoToModel (UserRequestDto U) {
     User user = new User(); 
     user.setNameUser(U.getNameUser());

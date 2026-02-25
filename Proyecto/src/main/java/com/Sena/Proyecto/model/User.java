@@ -18,23 +18,20 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "users" )
+@Table(name = "users")
 
 public class User extends BaseModel {
 
-    @Column(length = 50) 
-    private String nameUser; 
+    @Column(length = 50)
+    private String nameUser;
 
-    @Column (length = 50 )
-    private String password; 
+    @Column(length = 50)
+    private String password;
 
     @OneToOne
-    @JoinColumn (name = "id_person", unique = true)  
-    private Person person; 
+    @JoinColumn(name = "id_person", unique = true)
+    private Person person;
 
-@OneToMany(mappedBy = "user")
-private List<Role> roles;
-
-    
+    @OneToMany(mappedBy = "user")
+    private List<Role> roles; ;      
 }
-

@@ -51,6 +51,22 @@ public class RoleServiceImp implements RoleIService {
     repository.deleteById(id);
  }
 
+    @Override 
+    public RoleResponse update (Integer id, RoleRequestDto R) {
+        Role role = repository.findById(id).orElse(null); 
+
+        if(role == null) {
+            return null; 
+        }
+
+         role.setNameRole(R.getNameRole());
+         role.setDescripcion(R.getDescripcion());
+          repository.save(role); 
+
+          return modelTodto(role); 
+    
+ }
+
     // convertir de DTO A model 
 
     public Role dtoToModel(RoleRequestDto R) {
